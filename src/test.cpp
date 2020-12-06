@@ -2,6 +2,7 @@
 #include "test_fraction.h"
 #include "test_decision.h"
 #include "test_runner.h"
+#include "test_bigint.h"
 
 #include <iostream>
 
@@ -16,5 +17,8 @@ int main() {
 
     test_decision::TestAlldecisions();
     
+    std::cerr << "\n";
+
+    test_bigint::TestBigInt();
     return 0;
 }
