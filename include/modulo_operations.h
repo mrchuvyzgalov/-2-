@@ -40,24 +40,24 @@ T mFastPow(const T& a, const T& n, const T& mod) {
 
 template <class T>
 T mSum(T a, T b, const T& mod) {
-	if (a < T(0)) a += mod * (T(-1) * a / mod + 1);
-	if (b < T(0)) b += mod * (T(-1) * b / mod + 1);
+	if (a < T(0)) a += mod * (T(-1) * a / mod + T(1));
+	if (b < T(0)) b += mod * (T(-1) * b / mod + T(1));
 
 	return ((a % mod) + (b % mod)) % mod;
 }
 
 template <class T>
 T mDif(T a, T b, const T& mod) {
-	if (a < T(0)) a += mod * (T(-1) * a / mod + 1);
-	if (b < T(0)) b += mod * (T(-1) * b / mod + 1);
+	if (a < T(0)) a += mod * (T(-1) * a / mod + T(1));
+	if (b < T(0)) b += mod * (T(-1) * b / mod + T(1));
 
 	return (mod + (a % mod) - (b % mod)) % mod;
 }
 
 template <class T>
 T mMul(T a, T b, const T& mod) {
-	if (a < T(0)) a += mod * (T(-1) * a / mod + 1);
-	if (b < T(0)) b += mod * (T(-1) * b / mod + 1);
+	if (a < T(0)) a += mod * (T(-1) * a / mod + T(1));
+	if (b < T(0)) b += mod * (T(-1) * b / mod + T(1));
 
 	return ((a % mod) * (b % mod)) % mod;
 }

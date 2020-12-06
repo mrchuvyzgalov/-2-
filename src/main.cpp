@@ -16,8 +16,10 @@ int main() {
 	std::cout << "m = ";
 	std::cin >> m;
 
-	std::cout << "First decision:\n" << decision(a, b, m, 1);
-	std::cout << "Second decision:\n" << decision(a, b, m, 2);
-	std::cout << "Third decision:\n" << decision(a, b, m, 3);
+	std::cout << "EULER decision:\n" << decision(a, b, m, DecisionClass::EULER);
+	std::cout << "DIOPHANTINE decision:\n" << decision(a, b, m, DecisionClass::DIOPHANTINE);
+	std::cout << "BRUTE_FORCE_1 decision:\n" << decision(a, b, m, DecisionClass::BRUTE_FORCE_1);
+	std::cout << "BRUTE_FORCE_2 decision:\n" << decision(a, b, m, DecisionClass::BRUTE_FORCE_2);
+	std::cout << "FRACTIONS decision:\n" << decision(a, b, m, DecisionClass::FRACTIONS);
 	return 0;
 }

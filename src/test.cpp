@@ -1,15 +1,20 @@
 #include "test_modulo_operations.h"
-#include "UnitTestFramework.h"
+#include "test_fraction.h"
+#include "test_decision.h"
+#include "test_runner.h"
 
-void TestAll();
+#include <iostream>
 
 int main() {
-    TestAll();
+    test_operations::TestAllOperations();
+
+    std::cerr << "\n";
+
+    test_fraction::TestFraction();
+
+    std::cerr << "\n";
+
+    test_decision::TestAlldecisions();
+    
     return 0;
-}
-
-void TestAll() {
-    TestRunner tr;
-
-    tr.RunTest(TestAllOperations, "Test All Operations");
 }
