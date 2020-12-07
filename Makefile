@@ -1,6 +1,6 @@
 Warnings = -Wall -Wextra -Werror
 
-all: module research test
+all: module research test files
 
 module: obj/main.o obj/module.o obj/BigInt.o
 	g++ -std=c++17 $(Warnings) obj/main.o obj/module.o obj/BigInt.o -o module
@@ -38,8 +38,11 @@ obj/test_bigint.o: src/test_bigint.cpp include/test_bigint.h include/test_runner
 obj/BigInt.o: src/BigInt.cpp include/BigInt.h | obj
 	g++ -std=c++17 -c $(Warnings) -Iinclude src/BigInt.cpp -o obj/BigInt.o
 
+files:
+	mkdir files
+	
 obj:
 	mkdir obj
 
 clean:
-	rm -rf obj module research test
+	rm -rf obj module research test files
