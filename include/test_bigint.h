@@ -8,6 +8,7 @@ namespace test_bigint {
     void TestOut();
     void TestIn();
     void TestEqual();
+    void TestNotEqual();
     void TestMore();
     void TestLess();
     void TestMoreEqual();

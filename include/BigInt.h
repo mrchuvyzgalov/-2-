@@ -21,6 +21,7 @@ public:
 	friend std::istream& operator >>(std::istream& in, BigInt& numb);
 
 	friend bool operator ==(const BigInt& numb1, const BigInt& numb2);
+	friend bool operator !=(const BigInt& numb1, const BigInt& numb2);
 
 	friend bool operator >(const BigInt& numb1, const BigInt& numb2);
 	friend bool operator >=(const BigInt& numb1, const BigInt& numb2);

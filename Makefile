@@ -2,17 +2,17 @@ Warnings = -Wall -Wextra -Werror
 
 all: module research test
 
-module: obj/main.o obj/module.o
-	g++ -std=c++17 $(Warnings) obj/main.o obj/module.o -o module
+module: obj/main.o obj/module.o obj/BigInt.o
+	g++ -std=c++17 $(Warnings) obj/main.o obj/module.o obj/BigInt.o -o module
 
-obj/main.o: src/main.cpp include/module.h | obj
+obj/main.o: src/main.cpp include/module.h include/BigInt.h | obj
 	g++ -std=c++17 -c $(Warnings) -Iinclude src/main.cpp -o obj/main.o
 
 obj/module.o: src/module.cpp include/module.h | obj
 	g++ -std=c++17 -c $(Warnings) -Iinclude src/module.cpp -o obj/module.o
 
-research: obj/research.o obj/module.o
-	g++ -std=c++17 $(Warnings) obj/research.o obj/module.o -o research
+research: obj/research.o obj/module.o obj/BigInt.o
+	g++ -std=c++17 $(Warnings) obj/research.o obj/module.o obj/BigInt.o -o research
 
 obj/research.o: src/research.cpp include/module.h | obj
 	g++ -std=c++17 -c $(Warnings) -Iinclude src/research.cpp -o obj/research.o

@@ -7,6 +7,7 @@ void test_bigint::TestBigInt() {
 	RUN_TEST(tr, test_bigint::TestOut);
 	RUN_TEST(tr, test_bigint::TestIn);
 	RUN_TEST(tr, test_bigint::TestEqual);
+	RUN_TEST(tr, test_bigint::TestNotEqual);
 	RUN_TEST(tr, test_bigint::TestMore);
 	RUN_TEST(tr, test_bigint::TestLess);
 	RUN_TEST(tr, test_bigint::TestMoreEqual);
@@ -109,6 +110,29 @@ void test_bigint::TestEqual() {
 		BigInt b;
 		b = a;
 		ASSERT(a == b);
+	}
+}
+
+void test_bigint::TestNotEqual() {
+	{
+		BigInt a(5);
+		BigInt b;
+		ASSERT(a != b);
+	} 
+	{
+		BigInt a("-622781");
+		BigInt b("-621781");
+		ASSERT(a != b);
+	}
+	{
+		BigInt a("621783");
+		BigInt b("621781");
+		ASSERT(a != b);
+	}
+	{
+		BigInt a("-621781");
+		BigInt b;
+		ASSERT(a != b);
 	}
 }
 

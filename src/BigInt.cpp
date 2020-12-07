@@ -92,7 +92,9 @@ bool operator ==(const BigInt& numb1, const BigInt& numb2) {
 	return numb1.details == numb2.details && numb1.sign == numb2.sign;
 }
 
-
+bool operator !=(const BigInt& numb1, const BigInt& numb2) { 
+	return !(numb1 == numb2);
+}
 
 bool operator >(const BigInt& numb1, const BigInt& numb2) {
 	if (numb1.sign != numb2.sign) return numb1.sign > numb2.sign;
