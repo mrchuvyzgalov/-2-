@@ -1,5 +1,7 @@
 #pragma once
 
+#include "BigInt.h"
+
 namespace test_bigint {
     void TestBigInt();
 

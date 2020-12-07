@@ -1,5 +1,7 @@
 #pragma once
 
+#include "modulo_operations.h"
+
 namespace test_operations {
     void TestAllOperations();
 

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Fraction.h"
+
 namespace test_fraction {
     void TestFraction();
 

@@ -64,16 +64,20 @@ private:
 
 template <class T>
 Fraction<T>::Fraction(const T numerator, const T denominator) {
-	if (denominator == 0) throw std::runtime_error("ERROR: denominator = 0\n");
+	if (denominator == T(0)) throw std::runtime_error("ERROR: denominator = 0\n");
 
-	T gcd_num_den = gcd(std::abs(numerator), std::abs(denominator));
+	T gcd_num_den;
+	if (numerator >= T(0) && denominator >= T(0)) gcd_num_den = gcd(numerator, denominator);
+	else if (numerator >= T(0)) gcd_num_den = gcd(numerator, T(-1) * denominator);
+	else if (denominator >= T(0)) gcd_num_den = gcd(T(-1) * numerator, denominator);
+	else gcd_num_den = gcd(T(-1) * numerator, T(-1) * denominator);
 
 	numerator_ = numerator / gcd_num_den;
 	denominator_ = denominator / gcd_num_den;
 
-	if (denominator < 0) {
-		numerator_ *= -1;
-		denominator_ *= -1;
+	if (denominator < T(0)) {
+		numerator_ *= T(-1);
+		denominator_ *= T(-1);
 	}
 
 	fill_elems(numerator_, denominator_);
@@ -158,7 +162,7 @@ bool operator !=(const Fraction<V>& first, const Fraction<V>& second) {
 template <class T>
 T Fraction<T>::gcd(T first, T second) noexcept {
 	if (first < second) return gcd(second, first);
-	if (second == 0) return first;
+	if (second == T(0)) return first;
 	return gcd(second, first % second);
 }
 
@@ -167,14 +171,14 @@ void Fraction<T>::fill_elems(T num, T den) {
 	T q = num / den;
 	T r = num - q * den;
 
-	if (r < 0) {
-		q--;
+	if (r < T(0)) {
+		q = q - T(1);
 		r += den;
 	}
 
 	elems_.push_back(q);
 
-	if (r > 0) {
+	if (r > T(0)) {
 		fill_elems(den, r);
 	}
 }
@@ -186,10 +190,10 @@ void Fraction<T>::fill_numerators_denominators() {
 		denominators_.resize(elems_.size());
 
 		numerators_[0] = elems_[0];
-		denominators_[0] = 1;
+		denominators_[0] = T(1);
 
 		if (elems_.size() > 1) {
-			numerators_[1] = numerators_[0] * elems_[1] + 1;
+			numerators_[1] = numerators_[0] * elems_[1] + T(1);
 			denominators_[1] = denominators_[0] * elems_[1];
 
 			for (size_t i = 2; i < elems_.size(); ++i) {

@@ -1,5 +1,4 @@
 #include "test_bigint.h"
-#include "BigInt.h"
 #include "test_runner.h"
 
 void test_bigint::TestBigInt() {

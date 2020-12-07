@@ -10,6 +10,8 @@
 
 enum class DecisionClass { EULER, DIOPHANTINE, BRUTE_FORCE_1, BRUTE_FORCE_2, FRACTIONS };
 
+std::ostream& operator <<(std::ostream& out, const DecisionClass& class_);
+
 template <class T>
 class Deductions {
 public:
@@ -50,29 +52,27 @@ std::ostream& operator <<(std::ostream& out, const Deductions<U>& outDeductions)
 
 	if (leftovers.size() == 0) out << "no decisions\n";
 
-	for (auto curr : leftovers) { 
+	for (const auto& curr : leftovers) { 
 		out << "x = " << curr << " + " << module << " * k, k is integer\n";
 	}
 
 	return out;
 }
 
-
-
 template <class T>
 Deductions<T> decision(T a, T b, const T& mod, const DecisionClass& classOfDecision) {
-	if (a < 0) a += mod * ((T(-1) * a) / mod + T(1));
-	if (b < 0) b += mod * ((T(-1) * b) / mod + T(1));
+	if (a < T(0)) a += mod * ((T(-1) * a) / mod + T(1));
+	if (b < T(0)) b += mod * ((T(-1) * b) / mod + T(1));
 
 	T gcd_a_mod = gcd(a, mod);
 
-	if (b % gcd_a_mod != 0) return Deductions<T>(std::vector<T>{}, T(0));
+	if (b % gcd_a_mod != T(0)) return Deductions<T>(std::vector<T>{}, T(0));
 
 	T a1 = a / gcd_a_mod;
 	T b1 = b / gcd_a_mod;
 	T mod1 = mod / gcd_a_mod;
 
-	T x0 = 0;
+	T x0 = T(0);
 
 	if (classOfDecision == DecisionClass::EULER) { // Euler's theorem
 		x0 = mMul<T>(mFastPow<T>(a1, mDif<T>(EulerFunction<T>(mod1), T(1), mod1), mod1), b1, mod1);
@@ -82,11 +82,11 @@ Deductions<T> decision(T a, T b, const T& mod, const DecisionClass& classOfDecis
 		extgcd(a1, mod1, x0, y0);
 
 		x0 *= b1;
-		if (x0 < 0) x0 += mod1 * ((T(-1) * x0) / mod1 + T(1));
+		if (x0 < T(0)) x0 += mod1 * ((T(-1) * x0) / mod1 + T(1));
 		if (x0 >= mod1) x0 %= mod1;
 	}
 	else if (classOfDecision == DecisionClass::BRUTE_FORCE_1) { // brute force 1
-		while ((a1 * x0) % mod1 != (b1 % mod1)) x0++;
+		while ((a1 * x0) % mod1 != (b1 % mod1)) x0 = x0 + T(1);
 	}
 	else if (classOfDecision == DecisionClass::BRUTE_FORCE_2) { // brute force 2
 		T tmp = b1;
@@ -111,11 +111,11 @@ Deductions<T> decision(T a, T b, const T& mod, const DecisionClass& classOfDecis
 		}
 	}
 
-	std::vector<T> leftovers(gcd_a_mod);
-	for (auto& curr : leftovers) {
-		curr = x0;
+	std::vector<T> leftovers;
+	for (T i = T(0); i < gcd_a_mod; i = i + T(1)) {
+		leftovers.push_back(x0);
 		x0 += mod1;
 	}
 
-	return Deductions<T>(std::vector<T>(leftovers), T(mod));
+	return Deductions<T>(leftovers, T(mod));
 }

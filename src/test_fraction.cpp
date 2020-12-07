@@ -1,6 +1,5 @@
 #include "test_fraction.h"
 #include "test_runner.h"
-#include "Fraction.h"
 
 void test_fraction::TestFraction() {
 	TestRunner tr;

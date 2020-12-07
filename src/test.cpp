@@ -1,7 +1,6 @@
 #include "test_modulo_operations.h"
 #include "test_fraction.h"
 #include "test_decision.h"
-#include "test_runner.h"
 #include "test_bigint.h"
 
 #include <iostream>
@@ -16,7 +15,7 @@ int main() {
     std::cerr << "\n";
 
     test_decision::TestAlldecisions();
-    
+
     std::cerr << "\n";
 
     test_bigint::TestBigInt();

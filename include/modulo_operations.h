@@ -65,7 +65,7 @@ T mMul(T a, T b, const T& mod) {
 template <class T>
 T gcd(const T& a, const T& b) {
 	if (b > a) return gcd(b, a);
-	if (b == 0) return a;
+	if (b == T(0)) return a;
 	return gcd(b, a % b);
 }
 
@@ -100,7 +100,7 @@ T EulerFunction(T number) {
 			}
 			tmpNumber /= tmpSimple;
 		}
-		tmpSimple++;
+		tmpSimple = tmpSimple + T(1);
 	}
 
 	T mulInArr1 = T(1);
