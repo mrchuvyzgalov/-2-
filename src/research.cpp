@@ -11,37 +11,24 @@
 
 std::pair<std::vector<double>, std::string> example(const std::string& a, const std::string& b, const std::string& mod);
 
-std::ostream& operator <<(std::ostream& out, const std::pair<std::vector<double>, std::string>& example);
+std::ostream& operator <<(std::ostream& out, const std::vector<std::vector<double>>& table);
 
 int main() {
-    // a = (2**6) * (3**7)
-    // b = (2**6) * (3**2) * 5 
-    // mod = (2**6) * 3
-    std::cout << example("139968", "2880", "192") << std::endl; 
+    // a = (37**2)
+    // b = (23**3)
 
+    std::string a = "1369";
+    std::string b = "12167";
 
-    // a = (2**3) * (7**5)
-    // b = (2**7) * (11**4)
-    // mod = (3**2)
-    std::cout << example("134456", "1874048", "9") << std::endl; 
+    std::vector<std::vector<double>> table(10);
 
-    // a = (2**3) * (3**5)
-    // b = (3**7) * (11**4)
-    // mod = (3**9) * (11**2)
-    std::cout << example("1944", "32019867", "2381643") << std::endl; 
-
-    return 0;
-}
-
-std::ostream& operator <<(std::ostream& out, const std::pair<std::vector<double>, std::string>& example) {
-    out << std::fixed << std::setprecision(0) << "Example: " << " " << example.second << ":\n";
-
-    for (size_t i = 0; i < 5; ++i) {
-        out << static_cast<DecisionClass>(i);
-        out << " time: " << example.first[i] << " us " << std::endl;
+    for (size_t mod = 3; mod <= 12; ++mod) {
+        table[mod - 3] = example(a, b, std::to_string(mod)).first;
     }
 
-    return out;
+    std::cout << table;
+
+    return 0;
 }
 
 std::pair<std::vector<double>, std::string> example(const std::string& a, const std::string& b, const std::string& mod) {
@@ -59,4 +46,25 @@ std::pair<std::vector<double>, std::string> example(const std::string& a, const 
     }
 
     return std::make_pair(time, res);
+}
+
+std::ostream& operator <<(std::ostream& out, const std::vector<std::vector<double>>& table) {
+    out << "Results:\n";
+
+    out << std::setw(16) << "mod:";
+    for (size_t i = 3; i <= table.size() + 2; ++i) {
+        out << std::setw(10) << i << "|";
+    }
+    out << std::endl;
+
+    for (size_t i = 0; i < 5; ++i) {
+        out << std::setw(15) << static_cast<DecisionClass>(i) << ":";
+
+        for (size_t j = 0; j < table.size(); ++j) {
+            out << std::setw(10) << table[j][i] << "|";
+        }
+        out << std::endl;
+    }
+
+    return out;
 }
