@@ -7,7 +7,7 @@
 int main() {
 	std::cout << "Decision a * x = b(mod m)\n";
 
-	BigInt a, b, m;
+	int a, b, m;
 
 	std::cout << "a = ";
 	std::cin >> a;
