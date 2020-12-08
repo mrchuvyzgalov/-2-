@@ -66,7 +66,7 @@ std::ofstream& operator <<(std::ofstream& out, const std::vector<std::vector<dou
     out << 5 << "\n";
 
     for (size_t i = 0; i < 5; ++i) {
-        out << static_cast<DecisionClass>(i) << " TIME,us\n";
+        out << static_cast<DecisionClass>(i) << " MODULE TIME,us\n";
 
         for (size_t j = 0; j < table.size(); ++j) {
             out << table[j][i] << " ";

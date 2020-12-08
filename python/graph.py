@@ -17,8 +17,10 @@ try:
         new_fig, new_ax = plt.subplots()
 
         new_ax.set_xlim(xright, xleft)
+        
+        title, xlabel, ylabel = lines[i + 2].split()
 
-        xlabel, ylabel = lines[i + 2].split()
+        new_ax.set_title(title)
 
         new_ax.set_xlabel(xlabel)
         new_ax.set_ylabel(ylabel)
@@ -37,7 +39,7 @@ try:
     plt.style.use('seaborn-whitegrid')
 
     for i in range(len(fig)):
-        fig[i].savefig('../files/' + ax[i].get_xlabel() + '.png')
+        fig[i].savefig('../files/' + ax[i].get_title() + '.png')
 
     print('Files were created successfully\n')
 
