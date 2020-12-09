@@ -20,10 +20,10 @@ int main() {
     std::string a = "1369";
     std::string b = "12167";
 
-    std::vector<std::vector<double>> table(98);
+    std::vector<std::vector<double>> table(801);
 
-    for (size_t mod = 3; mod <= 100; ++mod) {
-        table[mod - 3] = example(a, b, std::to_string(mod)).first;
+    for (size_t mod = 200; mod <= 1000; ++mod) {
+        table[mod - 200] = example(a, b, std::to_string(mod)).first;
     }
 
     try {
@@ -62,7 +62,7 @@ std::pair<std::vector<double>, std::string> example(const std::string& a, const 
 
 std::ofstream& operator <<(std::ofstream& out, const std::vector<std::vector<double>>& table) {
 
-    out << 3 << " " << 100 << "\n";
+    out << 200 << " " << 1000 << "\n";
     out << 5 << "\n";
 
     for (size_t i = 0; i < 5; ++i) {

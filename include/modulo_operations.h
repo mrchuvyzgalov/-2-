@@ -86,21 +86,26 @@ T extgcd(const T& a, const T& b, T& x, T& y) {
 
 template <class T>
 T EulerFunction(T number) {
+	if (number == T(1)) return T(1);
+	
 	T tmpNumber = number;
 
 	std::vector<T> arr;
 
-	T tmpSimple = T(2);
-	while (tmpNumber > T(1)) {
-		bool res = false;
-		while (tmpNumber % tmpSimple == T(0)) {
-			if (!res) {
-				arr.push_back(tmpSimple);
-				res = true;
+	for (T i = T(2); i * i <= tmpNumber; i = i + T(1)) {
+		bool used = false;
+		while (tmpNumber % i == T(0)) {
+			if (!used) {
+				arr.push_back(i);
+				used = true;
 			}
-			tmpNumber /= tmpSimple;
+
+			tmpNumber /= i;
 		}
-		tmpSimple = tmpSimple + T(1);
+	}
+
+	if (tmpNumber > T(1)) {
+		arr.push_back(tmpNumber);
 	}
 
 	T mulInArr1 = T(1);
