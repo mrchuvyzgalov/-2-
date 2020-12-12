@@ -137,6 +137,13 @@ void test_fraction::TestSum() {
 		Fraction<int> result = first + second;
 		ASSERT(result.get_numerator() == 0 && result.get_denominator() == 1);
 	}
+
+	{
+		Fraction<int> first(-8, 10);
+		Fraction<int> second(-4, 5);
+		Fraction<int> result = first + second;
+		ASSERT(result.get_numerator() == -8 && result.get_denominator() == 5);
+	}
 }
 
 void test_fraction::TestDiff() {
@@ -166,6 +173,20 @@ void test_fraction::TestDiff() {
 		Fraction<int> second(-3, 5);
 		Fraction<int> result = first - second;
 		ASSERT(result.get_numerator() == 3 && result.get_denominator() == 2);
+	}
+
+	{
+		Fraction<int> first(-9, 10);
+		Fraction<int> second(3, 5);
+		Fraction<int> result = first - second;
+		ASSERT(result.get_numerator() == -3 && result.get_denominator() == 2);
+	}
+
+	{
+		Fraction<int> first(-9, 10);
+		Fraction<int> second(-3, 5);
+		Fraction<int> result = first - second;
+		ASSERT(result.get_numerator() == -3 && result.get_denominator() == 10);
 	}
 }
 

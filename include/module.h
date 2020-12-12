@@ -66,7 +66,7 @@ Deductions<T> decision(T a, T b, const T& mod, const DecisionClass& classOfDecis
 
 	T gcd_a_mod = gcd(a, mod);
 
-	if (b % gcd_a_mod != T(0)) return Deductions<T>(std::vector<T>{}, T(0));
+	if (b % gcd_a_mod != T(0)) return Deductions<T>(std::vector<T>{}, mod);
 
 	T a1 = a / gcd_a_mod;
 	T b1 = b / gcd_a_mod;

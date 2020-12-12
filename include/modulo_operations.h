@@ -28,14 +28,14 @@ T EulerFunction(T number);
 
 template <class T>
 T mFastPow(const T& a, const T& n, const T& mod) {
-	if (a < T(0) && n % T(2) != T(0)) return T(-1) * mFastPow(T(-1) * a, n, mod);
+	if (a < T(0) && n % T(2) != T(0)) return mMul(T(-1), mFastPow(T(-1) * a, n, mod), mod);
 	else if (a < T(0)) return mFastPow(T(-1) * a, n, mod);
 
 	if (n == T(0)) return T(1);
-	if (n % T(2) == T(1)) return ((a % mod) * mFastPow(a, n - T(1), mod)) % mod;
+	if (n % T(2) == T(1)) return mMul(a, mFastPow(a, n - T(1), mod), mod);
 
 	T tmp = mFastPow(a, n / T(2), mod);
-	return (tmp * tmp) % mod;
+	return mMul(tmp, tmp, mod);
 }
 
 template <class T>

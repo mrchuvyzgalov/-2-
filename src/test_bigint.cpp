@@ -604,10 +604,10 @@ void test_bigint::TestAbs() {
 		ASSERT_EQUAL(ss.str(), "6323323");
 	}
 	{
-		BigInt a("-6323323");
+		BigInt a("0");
 		std::stringstream ss;
 		ss << Abs(a);
-		ASSERT_EQUAL(ss.str(), "6323323");
+		ASSERT_EQUAL(ss.str(), "0");
 	}
 }
 

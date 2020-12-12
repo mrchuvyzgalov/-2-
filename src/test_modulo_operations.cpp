@@ -15,27 +15,27 @@ void test_operations::TestAllOperations() {
 
 void test_operations::TestFastPow() {
     {
-        ASSERT_EQUAL(mFastPow(0, 1, 10), 0);
+        ASSERT_EQUAL(mFastPow(0, 1, 11), 0);
     }
     
     {
-        ASSERT_EQUAL(mFastPow(-5, 1, 10), -5);
+        ASSERT_EQUAL(mFastPow(-5, 3, 11), 7);
     }
 
     {
-        ASSERT_EQUAL(mFastPow(-5, 2, 10), 5);
+        ASSERT_EQUAL(mFastPow(-5, 2, 11), 3);
     }
 
     {
         ASSERT_EQUAL(mFastPow(3, 4, 100), 81);
     }
+
+    {
+        ASSERT_EQUAL(mFastPow(3, 5, 100), 43);
+    }
 }
 
 void test_operations::TestSum() {
-    {
-        ASSERT_EQUAL(mSum(0, 1, 10), 1);
-    }
-
     {
         ASSERT_EQUAL(mSum(10, 3, 10), 3);
     }
@@ -51,7 +51,11 @@ void test_operations::TestSum() {
 
 void test_operations::TestDif() {
     {
-        ASSERT_EQUAL(mDif(0, 1, 10), 9);
+        ASSERT_EQUAL(mDif(3, 7, 10), 6);
+    }
+
+    {
+        ASSERT_EQUAL(mDif(5, 3, 10), 2);
     }
 
     {
