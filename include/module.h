@@ -15,17 +15,16 @@ std::ostream& operator <<(std::ostream& out, const DecisionClass& class_);
 template <class T>
 class Deductions {
 public:
-	explicit Deductions(const std::vector<T>& newLeftovers, const T& newModule);
-
-	std::vector<T> get_leftovers() const noexcept;
-	T get_module() const noexcept;
+	Deductions(const T& newLeftover, const T& newStep, const T& newModule, bool decision);
 
 	template <class U>
 	friend std::ostream& operator <<(std::ostream& out, const Deductions<U>& outDeductions);
 
 private:
-	std::vector<T> leftovers;
+	T firstLeftover;
+	T step;
 	T module;
+	bool hasDecision;
 };
 
 template <class T>
@@ -33,27 +32,17 @@ Deductions<T> decision(T a, T b, const T& mod, const DecisionClass& classOfDecis
 
 
 template <class T>
-Deductions<T>::Deductions(const std::vector<T>& newLeftovers, const T& newModule) : leftovers(newLeftovers), module(newModule) { }
-
-template <class T>
-std::vector<T> Deductions<T>::get_leftovers() const noexcept {
-	return leftovers;
-}
-
-template <class T>
-T Deductions<T>::get_module() const noexcept {
-	return module;
-}
+Deductions<T>::Deductions(const T& newLeftover, const T& newStep, const T& newModule, bool decision) : firstLeftover(newLeftover), step(newStep), module(newModule), hasDecision(decision) { }
 
 template <class U>
 std::ostream& operator <<(std::ostream& out, const Deductions<U>& outDeductions) {
-	std::vector<U> leftovers = outDeductions.get_leftovers();
-	U module = outDeductions.get_module();
-
-	if (leftovers.size() == 0) out << "no decisions\n";
-
-	for (const auto& curr : leftovers) { 
-		out << "x = " << curr << " + " << module << " * k, k is integer\n";
+	if (!outDeductions.hasDecision) {
+		out << "no decisions\n";
+	}
+	else {
+		for (U curr = outDeductions.firstLeftover; curr < outDeductions.module; curr += outDeductions.step) {
+			out << "x = " << curr << " + " << outDeductions.module << " * k, k is integer\n";
+		}
 	}
 
 	return out;
@@ -66,7 +55,7 @@ Deductions<T> decision(T a, T b, const T& mod, const DecisionClass& classOfDecis
 
 	T gcd_a_mod = gcd(a, mod);
 
-	if (b % gcd_a_mod != T(0)) return Deductions<T>(std::vector<T>{}, mod);
+	if (b % gcd_a_mod != T(0)) return Deductions<T>(T(0), T(0), mod, false);
 
 	T a1 = a / gcd_a_mod;
 	T b1 = b / gcd_a_mod;
@@ -95,7 +84,7 @@ Deductions<T> decision(T a, T b, const T& mod, const DecisionClass& classOfDecis
 	}
 	else if (classOfDecision == DecisionClass::FRACTIONS) { // fractions
 		Fraction<T> fr(mod1, a1);
-		
+
 		std::vector<T> nums = fr.get_numerators();
 
 		if (nums.size() == 1) {
@@ -110,12 +99,5 @@ Deductions<T> decision(T a, T b, const T& mod, const DecisionClass& classOfDecis
 			}
 		}
 	}
-
-	std::vector<T> leftovers;
-	for (T i = T(0); i < gcd_a_mod; i = i + T(1)) {
-		leftovers.push_back(x0);
-		x0 += mod1;
-	}
-
-	return Deductions<T>(leftovers, T(mod));
+	return Deductions<T>(x0, mod1, mod, true);
 }

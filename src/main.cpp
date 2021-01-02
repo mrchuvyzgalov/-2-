@@ -5,13 +5,16 @@
 #include <exception>
 
 int main() {
+	std::ios_base::sync_with_stdio(false);
+	std::cin.tie(nullptr);
+
 	std::cout << "Decision a * x = b(mod m)\n";
 
 	BigInt a, b, m;
 
 	std::cout << "a = ";
 	std::cin >> a;
-	
+
 	std::cout << "b = ";
 	std::cin >> b;
 
