@@ -11,7 +11,7 @@ void changeSign(Sign& sign);
 
 class BigInt {
 public:
-	explicit BigInt();
+	BigInt();
 	explicit BigInt(const std::string& number);
 	explicit BigInt(const long long& number);
 	
@@ -54,5 +54,5 @@ private:
 private:
 	std::vector<long long> details;
 	Sign sign;
-	const long long base = 1e10;
+	const long long base = 1e9;
 };

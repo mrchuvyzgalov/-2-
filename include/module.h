@@ -17,6 +17,11 @@ class Deductions {
 public:
 	Deductions(const T& newLeftover, const T& newStep, const T& newModule, bool decision);
 
+	const T& get_leftover() const noexcept { return firstLeftover; }
+	const T& get_step() const noexcept { return step; }
+	const T& get_module() const noexcept { return module; }
+	bool get_hasDecision() const noexcept { return hasDecision; }
+
 	template <class U>
 	friend std::ostream& operator <<(std::ostream& out, const Deductions<U>& outDeductions);
 
