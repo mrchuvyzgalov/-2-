@@ -14,7 +14,7 @@ public:
 	BigInt();
 	explicit BigInt(const std::string& number);
 	explicit BigInt(const long long& number);
-	
+
 	BigInt(const BigInt& numb);
 
 	friend std::ostream& operator <<(std::ostream& out, const BigInt& numb);
